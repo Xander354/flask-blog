@@ -1,0 +1,44 @@
+
+{% extends 'layout.html' %}
+{% from 'navbar.html' import render_navbar %}
+{% block title %}{{ g.branding }}{% endblock %}
+{% block navbar %}
+    <div class="container">
+      {# navigation #}
+      {{ render_navbar() }}
+    </div>
+{% endblock %}
+{% block content %}
+
+<div class="content">
+    <h1 class="title">Welcome to {{ g.brand }} </h1>
+    <p>
+    FlaskBlog is an open-source microBlog.  It is our hope it will be useful to
+    community members that have learned or are discovering the excellence of Python and the Flask web framework.
+    </p>
+    <p>
+    FlaskBlog leverages several Flask plugins and the simple and expressive PeeWee ORM by Charles Leifer.
+    In addition, we use the Bulma CSS framework and Bootstrap under the hood.
+    We look forward to community involvement to add more to the project.
+    </p>
+    {% if pages %}
+      <h3 class="subtitle">Blog Entries</h3>
+      {% for page in pages %}
+      
+      <div class="card">
+        <div class="card-content">
+          <a href="{{ url_for('page_view', page_id=page.id) }}"><p class="title">{{ page.title }}</p></a>
+          <p>
+            {{ page.snippet() }}
+          </p>
+        </div>
+      </div>
+      <p></p>
+
+      
+      {% endfor %}
+    {% else %}
+      <p>Get busy and create some content!</p>
+    {% endif %}
+</div>
+{% endblock %}

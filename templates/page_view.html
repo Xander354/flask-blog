@@ -1,0 +1,49 @@
+{% extends 'layout.html' %}
+{% from 'navbar.html' import render_navbar %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block navbar %}
+    {# navigation #}
+    {% if page.show_nav %}
+    <div class="container">
+        {{ render_navbar() }}
+    </div>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+    
+<div class="content">
+  {% if page.owner==session['user_id'] or session['is_admin'] %}
+  <div class="container">
+            <a href="{{ url_for('page_edit', page_id=page.id)}}">
+              <span class="icon">
+                <i class="far fa-edit"></i>
+              </span>
+              edit
+            </a>
+  </div>
+  {% endif %}
+  
+    {% if page.show_title %}
+        <h1 class="title">{{ page.title }}</h1>
+    {% endif %}
+    
+    {# breadcrumbs #}
+    {% if breadcrumbs %}
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+            <ul>
+                {% for breadcrumb, breadcrumb_url in breadcrumbs %}
+                    <li><a href="{{ breadcrumb_url }}">{{breadcrumb}}</a></li>
+                {% endfor %}
+                <li class="is-active"><a href="#" aria-current="page">{{page.slug}}</a></li>
+            </ul>
+        </nav>
+    {% endif %}
+
+    
+    <div>
+        {{ page.content|safe }}
+    </div>
+    
+</div>
+{% endblock %}

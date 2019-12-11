@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% from 'navbar.html' import render_navbar %}
+{% block title %}Blog Users{% endblock %}
+{% block navbar %}
+<div class="container">
+  {{ render_navbar() }}
+</div>
+{% endblock %}
+{% block content %}
+<div class="content">
+  <div class="container">
+    <table>
+      <tr><td>ID</td><td>Username</td><td>Displayname</td><td>is admin</td></tr>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.displayname }}</td>
+        <td>{{ user.is_admin }}</td>
+      </tr>
+    {% endfor %}
+    </table>
+  </div>
+</div>
+{% endblock %}

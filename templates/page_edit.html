@@ -1,0 +1,24 @@
+
+{% extends "layout.html" %}
+{% from 'macros.html' import field, ckeditor, checkbox, select %}
+{% from 'navbar.html' import render_navbar %}
+{% block title %}Edit page{% endblock %}
+{% block navbar %}
+    <div class="container">
+      {# navigation #}
+      {{ render_navbar() }}
+    </div>
+{% endblock %}
+{% block content %}
+<div class="content">
+<form method="POST">
+    {{ field(name="title", label="Page Title", value=page.title, help=errors.title, category=errors.title_category) }}
+    {{ checkbox(name="show_title", label="Show Title", checked=page.show_title) }}
+    {{ checkbox(name="show_nav", label="Show Top Navigation", checked=page.show_nav)}}
+    {{ field(name="slug", label="optional page slug", value=page.slug) }}
+    {{ checkbox(name="is_published", label="Published", checked=page.is_published) }}
+    {{ ckeditor(name="content", label="Content", value=page.content) }}
+    <input type="submit" class="button is-primary">
+</form>
+</div>
+{% endblock %}

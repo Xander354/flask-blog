@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+{% block content %}
+<H1 class="title">Simple page</H1>
+<p>
+  It was October in the year 1660.  The bonfires that had welcomed the
+Merry Monarch back to his father's throne were scarcely cold, the
+clamour of the joy-bells had hardly ceased, and London was still in a
+half-frightened, half-rapturous state of excitement.  Everything was
+new; the better part of the people had never even seen a king, and now
+they had the daily sight of a live king, and a couple of royal dukes
+besides, walking about the streets and feeding ducks in the parks like
+ordinary human beings.  The tension in men's minds suddenly gave way.
+To the winds with high-flown theories of government and religion, with
+ideals, and standards, and rules, and covenants!  Let us all be
+comfortable, and hang any one who might trouble our holiday!
+</p>
+{% if pages %}
+{% for page in pages %}
+      
+      <div class="card">
+        <div class="card-content">
+          <p class="title">
+            {{ page.snippet() }}
+          </p>
+          <p class="subtitle">
+            {{ page.author }}
+          </p>
+      </div>
+      
+{% endfor %}
+{% endif %}
+{% endblock %}

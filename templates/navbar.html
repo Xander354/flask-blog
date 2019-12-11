@@ -1,0 +1,42 @@
+
+{% macro render_navbar(category="is-light") %}
+  <nav class="navbar {{category}}" role="navigation" aria-label="dropdown navigation">
+    
+    <div class="navbar-item">
+        <a href="{{ url_for('index') }}">Home</a>
+    </div>
+    
+    {% if session['is_authenticated'] %}
+    <div class="navbar-item">
+        <a href="{{ url_for('user_profile') }}">Profile</a>
+    </div>
+      {% if session['is_admin'] %}
+        <div class="navbar-item">
+            <a href="{{ url_for('page_edit') }}">Create</a>
+        </div>
+      {% endif %}
+    <div class="navbar-item">
+        <a href="{{ url_for('logout') }}">Logout</a>
+    </div>
+    {% else %}
+    <div class="navbar-item">
+        <a href="{{ url_for('login') }}">Login</a>
+    </div>
+    {% endif %}
+    <div class="navbar-item navbar-end">
+      <form>
+          <div class="field is-grouped">
+            <p class="control is-expanded">
+              <input class="input" type="text" name="s" placeholder="Search term">
+            </p>
+            <p class="control">
+              <button type="submit" class="button is-info">
+                Search
+              </button>
+            </p>
+          </div>
+      </form>
+    </div>
+    
+  </nav>
+{% endmacro %}
